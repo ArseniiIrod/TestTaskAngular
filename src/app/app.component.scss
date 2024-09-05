@@ -1,0 +1,30 @@
+.add-btn-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 278px;
+  border: 2px dotted gray;
+  border-radius: 5px;
+  background: linear-gradient(to left, #ffffff, #e1e1e3);
+  cursor: pointer;
+
+  &.locked {
+    cursor: none;
+    pointer-events: none;
+  }
+
+  > span {
+    color: #0d6efd;
+    font-size: 40px;
+    width: 60px;
+    height: 60px;
+    border: 2px dotted #0d6efd;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+}

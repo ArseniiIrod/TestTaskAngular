@@ -1,0 +1,61 @@
+<div class="card">
+  <div class="card-body">
+    <form class="column" [formGroup]="formGroup">
+      <!-- COUNTRY -->
+      <div>
+        <div class="d-flex align-items-center justify-content-between mb-1">
+          <label for="countryControl">Country</label>
+          <button
+            type="button"
+            class="btn btn-sm"
+            [disabled]="formGroup.disabled"
+            (click)="onDeleteClick()"
+          >
+            &#10005;
+          </button>
+        </div>
+
+        <input
+          appValidationMessage
+          class="form-control"
+          list="countriesOptions"
+          id="countryControl"
+          aria-label="Country"
+          formControlName="country"
+        />
+        <datalist id="countriesOptions">
+          @for (country of countries; track country) {
+            <option [value]="country"></option>
+          }
+        </datalist>
+      </div>
+
+      <!-- USERNAME -->
+      <div class="my-3">
+        <label for="usernameControl" class="form-label">Username</label>
+        <input
+          appValidationMessage
+          id="usernameControl"
+          type="text"
+          class="form-control"
+          aria-label="Username"
+          formControlName="username"
+        />
+      </div>
+
+      <!-- BIRTHDAY -->
+      <div>
+        <label for="birthdayControl" class="form-label">Birthday</label>
+        <input
+          appValidationMessage
+          id="birthdayControl"
+          class="form-control"
+          type="date"
+          aria-label="Birthday"
+          formControlName="birthday"
+          [max]="maxDateLimit"
+        />
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<!-- FORM -->
+<form [formGroup]="formGroup">
+  <div class="d-flex align-items-center gap-2">
+    @if (!formSubmitted) {
+      <!-- SUBMIT BTN -->
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="invalidFormsCount > 0 || formCards.controls.length === 0"
+        (click)="onSubmit()"
+      >
+        Submit all forms
+      </button>
+
+      <!-- INVALID FORMS -->
+      @if (invalidFormsCount) {
+        <span class="text-danger">{{
+          "Invalid forms: " + invalidFormsCount
+        }}</span>
+      }
+    } @else {
+      <!-- CANCEL BTN -->
+      <button type="button" class="btn btn-danger" (click)="onCancel()">
+        Cancel
+      </button>
+
+      <!-- TIMER -->
+      <span>{{ timer | timeFormatter }}</span>
+    }
+  </div>
+
+  <!-- FORMS CARDS -->
+  <div
+    class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 gy-3 mt-2"
+  >
+    <ng-container formArrayName="formCards">
+      @for (card of formCards.controls; track card; let i = $index) {
+        <app-form
+          [formControlName]="i"
+          [countries]="countries"
+          (deleteClick)="onDeleteForm(i)"
+        ></app-form>
+      }
+    </ng-container>
+
+    <!-- ADD NEW FORM BTN -->
+    @if (formCards.controls.length < maxForms) {
+      <div>
+        <div
+          class="add-btn-wrapper"
+          [ngClass]="{ locked: formSubmitted }"
+          (click)="onAddNewForm()"
+        >
+          <span>+</span>
+        </div>
+      </div>
+    }
+  </div>
+</form>
