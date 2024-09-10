@@ -36,15 +36,16 @@ import {
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FormComponent),
+      useExisting: FormComponent,
       multi: true,
     },
     {
       provide: NG_ASYNC_VALIDATORS,
-      useExisting: forwardRef(() => FormComponent),
+      useExisting: FormComponent,
       multi: true,
     },
   ],
+  // Actually, we don't need forwardRef() because after compilation, the FormComponent is still defined before this call above
   imports: [ReactiveFormsModule, ValidationMessageDirective],
 })
 export class FormComponent
